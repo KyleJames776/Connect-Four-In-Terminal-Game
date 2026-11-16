@@ -161,13 +161,13 @@ def main():
             for sock, r, a in clients:
                 send_msg(sock, {"msg_type": "GAME_START", "role": r, "starting_turn": "X"})
             
-            # --- NEW CODE: Send the empty board to trigger Player X's prompt ---
+            
             broadcast({
                 "msg_type": "STATE_UPDATE", 
                 "board": board, 
                 "active_turn": active_turn
             })
-            # -------------------------------------------------------------------
+         
             
             for sock, r, a in clients:
                 threading.Thread(target=handle_client, args=(sock, r, a), daemon=True).start()
